@@ -1,0 +1,1522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kaarjo Technology | Engineering Intelligent Software for Business Problems</title>
+<meta name="description" content="Kaarjo Technology builds AI products, MVPs, ERP systems and autonomous agents for startups, SMEs, enterprises and government. Based in Chattogram and Dhaka, Bangladesh.">
+<meta name="theme-color" content="#0A0A0A">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Kaarjo Technology | Engineering Intelligent Software">
+<meta property="og:description" content="We turn complex workflows into scalable digital products. AI products, MVPs, ERP, and agent automation.">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://kaarjo.com/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Organization","name":"Kaarjo Technology","url":"https://kaarjo.com","description":"AI-first software engineering company building intelligent products, ERP systems and autonomous agents.","address":{"@type":"PostalAddress","addressLocality":"Chattogram","addressCountry":"BD"}}
+</script>
+<style>
+/* ============================================================
+   DESIGN TOKENS
+   ============================================================ */
+:root{
+  --bg:#0A0A0A;
+  --surface:#121212;
+  --surface-2:#171717;
+  --glass:rgba(255,255,255,.06);
+  --glass-hi:rgba(255,255,255,.09);
+  --border:rgba(255,255,255,.08);
+  --border-hi:rgba(255,255,255,.16);
+  --text:#FFFFFF;
+  --muted:#B8B8B8;
+  --dim:#767676;
+  --lime:#A3E635;
+  --lime-deep:#7CB518;
+  --lime-ink:#A3E635;
+  --lime-glow:rgba(163,230,53,.16);
+  --blue-glow:rgba(56,120,255,.10);
+
+  --sheen:rgba(255,255,255,.07);
+  --soft:rgba(255,255,255,.03);
+  --node-fill:rgba(255,255,255,.055);
+  --wire:rgba(255,255,255,.14);
+  --gridline:rgba(255,255,255,.035);
+  --input-bg:rgba(255,255,255,.04);
+  --mock:rgba(255,255,255,.09);
+  --nav-bg:rgba(10,10,10,.72);
+  --panel-bg:rgba(18,18,18,.92);
+  --mobile-bg:rgba(10,10,10,.97);
+  --shadow:rgba(0,0,0,.55);
+  --shadow-soft:rgba(0,0,0,.5);
+  --grad-a:#fff; --grad-b:#cfe9a4; --grad-c:#A3E635;
+  --band-a:rgba(163,230,53,.11); --band-b:rgba(255,255,255,.03); --band-edge:rgba(163,230,53,.2);
+  --mock-lime:rgba(163,230,53,.45);
+  --tsw-bg:#141414; --knob:#E8EAE2;
+  color-scheme:dark;
+
+  --r-sm:12px; --r-md:20px; --r-lg:28px; --r-xl:36px;
+  --maxw:1200px;
+  --gut:clamp(20px,5vw,48px);
+  --ease:cubic-bezier(.16,1,.3,1);
+
+  --f-display:'Nunito',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --f-mono:'JetBrains Mono',ui-monospace,'SF Mono',Menlo,monospace;
+}
+
+html[data-theme="light"]{
+  --bg:#F4F6F1;
+  --surface:#FFFFFF;
+  --surface-2:#EAEDE5;
+  --glass:rgba(255,255,255,.66);
+  --glass-hi:rgba(255,255,255,.9);
+  --border:rgba(14,18,10,.10);
+  --border-hi:rgba(14,18,10,.20);
+  --text:#0D110A;
+  --muted:#4F5449;
+  --dim:#7E8477;
+  --lime-ink:#4A7A0B;
+  --lime-glow:rgba(163,230,53,.34);
+  --blue-glow:rgba(56,120,255,.08);
+
+  --sheen:rgba(255,255,255,.75);
+  --soft:rgba(255,255,255,.55);
+  --node-fill:rgba(255,255,255,.8);
+  --wire:rgba(14,18,10,.15);
+  --gridline:rgba(14,18,10,.05);
+  --input-bg:rgba(255,255,255,.85);
+  --mock:rgba(14,18,10,.09);
+  --nav-bg:rgba(244,246,241,.78);
+  --panel-bg:rgba(255,255,255,.95);
+  --mobile-bg:rgba(244,246,241,.98);
+  --shadow:rgba(24,34,12,.13);
+  --shadow-soft:rgba(24,34,12,.1);
+  --grad-a:#0D110A; --grad-b:#3F6B0C; --grad-c:#5E9C10;
+  --band-a:rgba(163,230,53,.26); --band-b:rgba(255,255,255,.6); --band-edge:rgba(120,175,30,.34);
+  --mock-lime:rgba(122,178,24,.75);
+  --tsw-bg:#E4E8DC; --knob:#3D4238;
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:var(--f-display);font-weight:400;font-size:17px;line-height:1.65;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+  transition:background .45s var(--ease),color .45s var(--ease);
+}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--lime);outline-offset:3px;border-radius:6px}
+
+/* ============================================================
+   TYPOGRAPHY  — Nunito set tight & heavy so it reads engineered,
+   not friendly. Mono carries all labels and data.
+   ============================================================ */
+.h-hero{
+  font-size:clamp(44px,8.2vw,96px);font-weight:900;line-height:.98;
+  letter-spacing:-.045em;margin:0;
+}
+.h-sec{
+  font-size:clamp(32px,5.2vw,60px);font-weight:900;line-height:1.03;
+  letter-spacing:-.038em;margin:0;
+}
+.h-sub{
+  font-size:clamp(21px,2.6vw,30px);font-weight:800;line-height:1.2;
+  letter-spacing:-.028em;margin:0;
+}
+.h-card{font-size:20px;font-weight:800;letter-spacing:-.02em;line-height:1.25;margin:0}
+.lede{font-size:clamp(17px,1.7vw,20px);color:var(--muted);line-height:1.65;max-width:60ch;margin:0}
+.body-dim{color:var(--muted);margin:0}
+.eyebrow{
+  font-family:var(--f-mono);font-size:11.5px;font-weight:500;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--lime-ink);display:inline-flex;align-items:center;gap:10px;
+}
+.eyebrow::before{content:"";width:22px;height:1px;background:var(--lime-ink);opacity:.7}
+.mono{font-family:var(--f-mono);font-size:12px;letter-spacing:.06em;color:var(--dim)}
+.accent{color:var(--lime-ink)}
+.grad-text{
+  background:linear-gradient(96deg,var(--grad-a) 18%,var(--grad-b) 55%,var(--grad-c) 92%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+
+/* ============================================================
+   LAYOUT
+   ============================================================ */
+.wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding-inline:var(--gut)}
+section{position:relative}
+.sec{padding-block:clamp(72px,10vw,140px);scroll-margin-top:84px}
+.sec-tight{padding-block:clamp(56px,7vw,96px)}
+.stack-sm{display:flex;flex-direction:column;gap:14px}
+.stack-md{display:flex;flex-direction:column;gap:22px}
+.head-block{max-width:760px;display:flex;flex-direction:column;gap:20px;margin-bottom:clamp(40px,5vw,64px)}
+.grid{display:grid;gap:18px}
+.grid > *{min-width:0}
+.g-2{grid-template-columns:repeat(2,1fr)}
+.g-3{grid-template-columns:repeat(3,1fr)}
+.g-4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:900px){.g-3,.g-4{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.g-2,.g-3,.g-4{grid-template-columns:1fr}}
+
+/* ambient light */
+.glow{position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none;z-index:0}
+.glow-lime{background:var(--lime-glow)}
+.glow-blue{background:var(--blue-glow)}
+@media(max-width:640px){
+  .glow{
+    width:80vw !important;height:80vw !important;max-width:340px !important;max-height:340px !important;
+    left:50% !important;right:auto !important;bottom:auto !important;top:-60px !important;
+    transform:translateX(-50%) !important;
+  }
+  .glow.glow-blue{display:none}
+}
+
+/* ============================================================
+   GLASS SURFACES
+   ============================================================ */
+.glass{
+  background:var(--glass);
+  border:1px solid var(--border);
+  border-radius:var(--r-lg);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  position:relative;overflow:hidden;
+}
+.glass > *{position:relative;z-index:1}
+.glass::before{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:linear-gradient(160deg,var(--sheen),transparent 42%);
+}
+.card{
+  padding:28px;display:flex;flex-direction:column;gap:14px;
+  width:100%;box-sizing:border-box;
+  transition:border-color .45s var(--ease),transform .45s var(--ease),background .45s var(--ease);
+}
+.card:hover{border-color:var(--border-hi);background:var(--glass-hi);transform:translateY(-4px)}
+.card p{margin:0;color:var(--muted);font-size:15.5px;line-height:1.62}
+
+/* icon tile */
+.ico{
+  width:46px;height:46px;border-radius:14px;display:grid;place-items:center;flex:none;
+  background:linear-gradient(150deg,rgba(163,230,53,.24),rgba(163,230,53,.06));
+  border:1px solid rgba(163,230,53,.3);color:var(--lime-ink);
+}
+.ico svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  padding:14px 26px;border-radius:100px;font-weight:800;font-size:15.5px;
+  letter-spacing:-.012em;white-space:nowrap;position:relative;
+  transition:transform .3s var(--ease),background .3s var(--ease),box-shadow .3s var(--ease),border-color .3s var(--ease);
+}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:translateY(0)}
+.btn-primary{background:var(--lime);color:#0A0A0A;box-shadow:0 6px 30px rgba(163,230,53,.22)}
+.btn-primary:hover{background:#b4f04a;box-shadow:0 10px 40px rgba(163,230,53,.34)}
+.btn-ghost{border:1px solid var(--border-hi);color:var(--text);background:var(--glass)}
+.btn-ghost:hover{background:var(--glass-hi);border-color:rgba(255,255,255,.3)}
+.btn-sm{padding:10px 20px;font-size:14px}
+.btn .arw{transition:transform .35s var(--ease)}
+.btn:hover .arw{transform:translateX(4px)}
+
+.link-arw{
+  display:inline-flex;align-items:center;gap:8px;font-weight:800;font-size:15px;
+  color:var(--lime-ink);letter-spacing:-.01em;
+}
+.link-arw svg{transition:transform .35s var(--ease)}
+.link-arw:hover svg{transform:translateX(5px)}
+
+
+/* ============================================================
+   THEME SWITCH — the knob is a signal travelling a circuit
+   trace, echoing the hero system canvas. Dark = trace idle,
+   crescent knob. Light = trace energised, knob a lit node.
+   ============================================================ */
+.tsw{
+  position:relative;flex:none;width:64px;height:32px;border-radius:100px;padding:0;
+  background:var(--tsw-bg);border:1px solid var(--border-hi);
+  transition:border-color .4s var(--ease),background .45s var(--ease);
+}
+.tsw:hover{border-color:rgba(163,230,53,.5)}
+.tsw-wire{
+  position:absolute;left:11px;right:11px;top:50%;height:1.5px;margin-top:-.75px;
+  background:var(--wire);border-radius:2px;
+}
+.tsw-wire::before,.tsw-wire::after{
+  content:"";position:absolute;top:50%;width:4.5px;height:4.5px;border-radius:50%;
+  background:var(--wire);transform:translateY(-50%);
+}
+.tsw-wire::before{left:-2px}
+.tsw-wire::after{right:-2px}
+.tsw-trail{
+  position:absolute;left:11px;top:50%;height:1.5px;margin-top:-.75px;width:0;
+  background:var(--lime);border-radius:2px;box-shadow:0 0 9px var(--lime);
+  transition:width .6s var(--ease);
+}
+.tsw-knob{
+  position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;
+  background:var(--knob);
+  transition:transform .6s var(--ease),background .45s var(--ease),box-shadow .45s var(--ease);
+}
+.tsw-knob::after{
+  content:"";position:absolute;inset:0;border-radius:50%;background:var(--tsw-bg);
+  transform:translate(7px,-6px);
+  transition:transform .55s var(--ease),background .45s var(--ease);
+}
+html[data-theme="light"] .tsw-trail{width:23px}
+html[data-theme="light"] .tsw-knob{
+  transform:translateX(32px);background:var(--lime);
+  box-shadow:0 0 0 3px rgba(163,230,53,.22),0 0 18px rgba(163,230,53,.65);
+}
+html[data-theme="light"] .tsw-knob::after{transform:translate(0,0) scale(0)}
+/* click feedback: the trace pulses like the hero signal */
+.tsw.zap .tsw-wire{animation:zap .6s var(--ease)}
+@keyframes zap{0%{background:var(--lime);box-shadow:0 0 10px var(--lime)}100%{background:var(--wire);box-shadow:none}}
+@media(max-width:960px){.tsw{width:56px;height:30px}
+  .tsw-knob{width:22px;height:22px}
+  html[data-theme="light"] .tsw-knob{transform:translateX(26px)}
+  html[data-theme="light"] .tsw-trail{width:19px}}
+
+/* ============================================================
+   NAV
+   ============================================================ */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  transition:background .4s var(--ease),border-color .4s var(--ease),backdrop-filter .4s;
+  border-bottom:1px solid transparent;
+}
+.nav.stuck{
+  background:var(--nav-bg);border-bottom-color:var(--border);
+  backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%);
+}
+.nav-in{display:flex;align-items:center;justify-content:space-between;height:72px;gap:20px}
+.logo{display:flex;align-items:center;gap:9px;font-weight:900;font-size:21px;letter-spacing:-.05em}
+.logo .dot{width:7px;height:7px;border-radius:50%;background:var(--lime);box-shadow:0 0 12px var(--lime);margin-top:6px}
+.nav-links{display:flex;align-items:center;gap:4px}
+.nav-links a,.nav-links button.navitem{
+  padding:9px 15px;border-radius:100px;font-size:15px;font-weight:700;color:var(--muted);
+  letter-spacing:-.01em;transition:color .3s,background .3s;display:inline-flex;align-items:center;gap:6px;
+}
+.nav-links a:hover,.nav-links button.navitem:hover{color:var(--text);background:var(--glass)}
+.nav-cta{display:flex;align-items:center;gap:10px}
+
+.dd{position:relative}
+.dd-panel{
+  position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%) translateY(-8px);
+  width:min(640px,86vw);padding:12px;opacity:0;visibility:hidden;
+  transition:opacity .3s var(--ease),transform .3s var(--ease),visibility .3s;
+  display:grid;grid-template-columns:1fr 1fr;gap:4px;
+  background:var(--panel-bg);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  border:1px solid var(--border);border-radius:var(--r-md);box-shadow:0 30px 70px var(--shadow);
+}
+.dd:hover .dd-panel,.dd.open .dd-panel{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
+.nav-links a.dd-item{display:flex;gap:12px;padding:13px;border-radius:14px;background:none;color:var(--text);align-items:flex-start}
+.nav-links a.dd-item:hover{background:var(--glass)}
+.dd-item .t{font-weight:800;font-size:14.5px;letter-spacing:-.015em;color:var(--text);margin:0}
+.dd-item .d{font-size:12.5px;color:var(--dim);margin:2px 0 0;line-height:1.45}
+.dd-item .ico{width:34px;height:34px;border-radius:10px}
+.dd-item .ico svg{width:17px;height:17px}
+
+.burger{display:none;width:42px;height:42px;border-radius:12px;border:1px solid var(--border);place-items:center;background:var(--glass)}
+.burger span{display:block;width:17px;height:1.6px;background:var(--text);border-radius:2px;transition:transform .35s var(--ease),opacity .25s}
+.burger span+span{margin-top:4.5px}
+.burger.on span:nth-child(1){transform:translateY(6.1px) rotate(45deg)}
+.burger.on span:nth-child(2){opacity:0}
+.burger.on span:nth-child(3){transform:translateY(-6.1px) rotate(-45deg)}
+
+.mobile{
+  position:fixed;inset:72px 0 0;z-index:99;background:var(--mobile-bg);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  padding:24px var(--gut) 48px;overflow-y:auto;display:none;flex-direction:column;gap:6px;
+}
+.mobile.on{display:flex;animation:fadeUp .35s var(--ease)}
+.mobile a{padding:14px 4px;font-size:19px;font-weight:800;letter-spacing:-.025em;border-bottom:1px solid var(--border)}
+.mobile .grp{font-family:var(--f-mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);margin-top:20px;padding-bottom:4px}
+.mobile .btn{margin-top:24px;width:100%}
+@media(max-width:960px){
+  .nav-links,.nav-cta .btn{display:none}
+  .burger{display:grid}
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{padding-top:150px;padding-bottom:clamp(60px,8vw,110px);overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(32px,5vw,64px);align-items:center}
+@media(max-width:980px){.hero-grid{grid-template-columns:1fr;gap:44px}}
+.hero-solo{grid-template-columns:1fr;justify-items:center;text-align:center}
+.hero-solo .hero-cta{justify-content:center}
+.hero-copy{display:flex;flex-direction:column;gap:26px;position:relative;z-index:2}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:6px}
+/* ============================================================
+   MARQUEE / STAT STRIP
+   ============================================================ */
+.strip{border-block:1px solid var(--border);background:var(--soft)}
+.strip-in{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border)}
+@media(max-width:760px){.strip-in{grid-template-columns:repeat(2,1fr)}}
+.stat{background:var(--bg);padding:30px clamp(16px,3vw,32px);display:flex;flex-direction:column;gap:5px}
+.stat b{font-size:clamp(28px,3.6vw,40px);font-weight:900;letter-spacing:-.045em;line-height:1}
+.stat span{font-family:var(--f-mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--dim)}
+
+/* ============================================================
+   PROCESS
+   ============================================================ */
+.proc{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;position:relative}
+@media(max-width:900px){.proc{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.proc{grid-template-columns:1fr}}
+.step{padding:26px;display:flex;flex-direction:column;gap:12px;border-radius:var(--r-md)}
+.step .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.2em;color:var(--lime-ink)}
+.step h3{font-size:19px;font-weight:800;letter-spacing:-.02em;margin:0}
+.step p{margin:0;font-size:14.5px;color:var(--muted);line-height:1.6}
+.step .dur{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-top:auto;padding-top:14px}
+
+/* ============================================================
+   SERVICE CARDS
+   ============================================================ */
+.svc{
+  padding:30px;border-radius:var(--r-lg);display:flex;flex-direction:column;gap:16px;
+  min-height:270px;transition:border-color .45s var(--ease),transform .45s var(--ease),background .45s var(--ease);
+}
+.svc:hover{border-color:rgba(163,230,53,.34);transform:translateY(-5px);background:var(--glass-hi)}
+.svc .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:6px}
+.tag{
+  font-family:var(--f-mono);font-size:10.5px;letter-spacing:.05em;color:var(--muted);
+  padding:5px 10px;border:1px solid var(--border);border-radius:100px;background:var(--soft);
+}
+.svc .go{display:flex;align-items:center;gap:7px;color:var(--lime-ink);font-weight:800;font-size:14.5px;opacity:.85;transition:opacity .3s,gap .3s var(--ease)}
+.svc:hover .go{opacity:1;gap:11px}
+
+/* ============================================================
+   WHY / FEATURE LIST
+   ============================================================ */
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,4vw,56px);align-items:start}
+@media(max-width:900px){
+  .why-grid{grid-template-columns:1fr}
+  .why-grid .head-block{position:static !important;top:auto !important}
+}
+.why-list{display:flex;flex-direction:column;border-top:1px solid var(--border)}
+.why-item{
+  display:flex;gap:18px;padding:22px 6px;border-bottom:1px solid var(--border);
+  transition:padding-left .4s var(--ease),background .4s var(--ease);
+}
+.why-item:hover{padding-left:16px;background:linear-gradient(90deg,rgba(163,230,53,.05),transparent)}
+.why-item .k{font-family:var(--f-mono);font-size:11px;color:var(--lime-ink);padding-top:5px;flex:none;letter-spacing:.1em}
+.why-item h4{margin:0 0 4px;font-size:17.5px;font-weight:800;letter-spacing:-.02em}
+.why-item p{margin:0;font-size:14.5px;color:var(--muted);line-height:1.6}
+
+/* ============================================================
+   PROJECTS
+   ============================================================ */
+.proj{
+  border-radius:var(--r-lg);overflow:hidden;display:flex;flex-direction:column;
+  width:100%;box-sizing:border-box;min-width:0;
+  transition:transform .5s var(--ease),border-color .5s var(--ease);
+}
+.proj:hover{transform:translateY(-6px);border-color:var(--border-hi)}
+.proj-vis{
+  height:210px;position:relative;overflow:hidden;
+  background:radial-gradient(120% 100% at 50% 0%,rgba(163,230,53,.13),transparent 62%),var(--surface-2);
+  border-bottom:1px solid var(--border);display:grid;place-items:center;
+}
+.proj-vis::after{
+  content:"";position:absolute;inset:0;
+  background-image:linear-gradient(var(--gridline) 1px,transparent 1px),linear-gradient(90deg,var(--gridline) 1px,transparent 1px);
+  background-size:34px 34px;mask-image:radial-gradient(80% 70% at 50% 40%,#000,transparent);
+  -webkit-mask-image:radial-gradient(80% 70% at 50% 40%,#000,transparent);
+}
+.proj-mock{
+  position:relative;z-index:2;width:78%;border-radius:12px 12px 0 0;
+  background:var(--node-fill);border:1px solid var(--border-hi);border-bottom:0;
+  padding:10px;margin-top:34px;backdrop-filter:blur(8px);box-shadow:0 20px 50px var(--shadow-soft);
+  transition:transform .6s var(--ease);
+}
+.proj:hover .proj-mock{transform:translateY(-8px)}
+.mock-bar{display:flex;gap:5px;margin-bottom:9px}
+.mock-bar i{width:7px;height:7px;border-radius:50%;background:var(--border-hi)}
+.mock-row{height:7px;border-radius:4px;background:var(--mock);margin-bottom:6px}
+.mock-row.lime{background:var(--mock-lime);width:44%}
+.mock-row.w70{width:70%} .mock-row.w52{width:52%} .mock-row.w86{width:86%}
+.proj-body{padding:26px;display:flex;flex-direction:column;gap:11px}
+.proj-body h3{margin:0;font-size:21px;font-weight:800;letter-spacing:-.025em}
+.proj-body p{margin:0;color:var(--muted);font-size:15px;line-height:1.6}
+
+/* ============================================================
+   CTA BAND
+   ============================================================ */
+.cta-band{
+  border-radius:var(--r-xl);padding:clamp(44px,7vw,84px) clamp(24px,5vw,64px);
+  text-align:center;position:relative;overflow:hidden;
+  background:linear-gradient(165deg,var(--band-a),var(--band-b) 45%,var(--soft));
+  border:1px solid var(--band-edge);
+}
+.cta-band .inner{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:22px}
+.cta-band .lede{text-align:center;margin-inline:auto}
+
+/* ============================================================
+   FORM
+   ============================================================ */
+.contact-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(28px,4vw,56px);align-items:start}
+@media(max-width:900px){.contact-grid{grid-template-columns:1fr}}
+.cinfo{display:flex;flex-direction:column;gap:2px}
+.cinfo a,.cinfo div.row{display:flex;gap:14px;align-items:flex-start;padding:18px 0;border-bottom:1px solid var(--border)}
+.cinfo .lbl{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:3px}
+.cinfo .val{font-weight:800;font-size:16px;letter-spacing:-.015em}
+.cinfo .sub{font-size:14px;color:var(--muted)}
+.form{padding:clamp(24px,3.5vw,36px);display:flex;flex-direction:column;gap:16px}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:560px){.frow{grid-template-columns:1fr}}
+.field{display:flex;flex-direction:column;gap:7px}
+.field label{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.field input,.field select,.field textarea{
+  width:100%;padding:13px 15px;border-radius:14px;font:inherit;font-size:15.5px;
+  background:var(--input-bg);border:1px solid var(--border);color:var(--text);
+  transition:border-color .3s,background .3s;appearance:none;
+}
+.field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 15px center}
+.field select option{background:var(--surface-2);color:var(--text)}
+.field textarea{resize:vertical;min-height:110px;line-height:1.6}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:rgba(163,230,53,.55);background:var(--glass-hi)}
+.field.err input,.field.err select,.field.err textarea{border-color:#F26D6D}
+.field .msg{font-size:12.5px;color:#F26D6D;min-height:0;display:none}
+.field.err .msg{display:block}
+.form-note{font-size:13px;color:var(--dim);line-height:1.55;margin:0}
+.sent{
+  display:none;flex-direction:column;align-items:center;text-align:center;gap:14px;
+  padding:clamp(36px,5vw,56px) 28px;
+}
+.sent.on{display:flex}
+.sent .tick{
+  width:60px;height:60px;border-radius:50%;display:grid;place-items:center;
+  background:rgba(163,230,53,.18);border:1px solid rgba(163,230,53,.44);color:var(--lime-ink);
+}
+.sent .tick svg{width:28px;height:28px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+
+/* ============================================================
+   FAQ
+   ============================================================ */
+.faq{border-top:1px solid var(--border)}
+.faq-item{border-bottom:1px solid var(--border)}
+.faq-q{
+  width:100%;display:flex;align-items:center;justify-content:space-between;gap:20px;text-align:left;
+  padding:24px 4px;font-size:clamp(16.5px,2vw,19px);font-weight:800;letter-spacing:-.02em;
+  transition:color .3s,padding-left .4s var(--ease);
+}
+.faq-q:hover{color:var(--lime-ink);padding-left:12px}
+.faq-ic{
+  width:30px;height:30px;flex:none;border-radius:50%;border:1px solid var(--border-hi);
+  display:grid;place-items:center;position:relative;transition:transform .4s var(--ease),border-color .3s,background .3s;
+}
+.faq-ic::before,.faq-ic::after{content:"";position:absolute;background:currentColor;border-radius:2px;transition:opacity .3s}
+.faq-ic::before{width:11px;height:1.6px}
+.faq-ic::after{width:1.6px;height:11px}
+.faq-item.open .faq-ic{transform:rotate(90deg);border-color:var(--lime-ink);background:rgba(163,230,53,.14);color:var(--lime-ink)}
+.faq-item.open .faq-ic::after{opacity:0}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .45s var(--ease)}
+.faq-a p{margin:0;padding:0 60px 26px 4px;color:var(--muted);font-size:15.5px;line-height:1.7}
+
+/* ============================================================
+   SERVICE PAGE BITS
+   ============================================================ */
+.svc-hero{padding-top:140px;padding-bottom:clamp(44px,6vw,80px);overflow:hidden}
+.crumbs{display:flex;align-items:center;gap:9px;font-family:var(--f-mono);font-size:11.5px;color:var(--dim);margin-bottom:26px;letter-spacing:.06em}
+.crumbs a:hover{color:var(--lime-ink)}
+.checklist{display:grid;grid-template-columns:repeat(2,1fr);gap:2px}
+@media(max-width:680px){.checklist{grid-template-columns:1fr}}
+.check{
+  display:flex;gap:14px;align-items:flex-start;padding:18px;border-radius:14px;
+  transition:background .35s var(--ease);
+}
+.check:hover{background:var(--glass)}
+.check .tk{
+  width:22px;height:22px;border-radius:50%;flex:none;margin-top:2px;display:grid;place-items:center;
+  background:rgba(163,230,53,.18);border:1px solid rgba(163,230,53,.42);color:var(--lime-ink);
+}
+.check .tk svg{width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.check b{font-weight:700;font-size:15.5px;letter-spacing:-.012em}
+.techrow{display:flex;flex-wrap:wrap;gap:10px}
+.techpill{
+  display:inline-flex;align-items:center;gap:9px;padding:11px 18px;border-radius:100px;
+  border:1px solid var(--border);background:var(--soft);font-family:var(--f-mono);font-size:13px;
+  color:var(--muted);transition:border-color .35s,color .35s,background .35s,transform .35s var(--ease);
+}
+.techpill:hover{border-color:rgba(163,230,53,.4);color:var(--text);background:var(--glass-hi);transform:translateY(-2px)}
+.techpill i{width:6px;height:6px;border-radius:50%;background:var(--lime);opacity:.7;font-style:normal}
+.indgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;border:1px solid var(--border);border-radius:var(--r-md);overflow:hidden}
+@media(max-width:760px){.indgrid{grid-template-columns:repeat(2,1fr)}}
+.ind{
+  padding:26px 22px;background:var(--soft);display:flex;flex-direction:column;gap:6px;
+  outline:1px solid var(--border);transition:background .35s;
+}
+.ind:hover{background:rgba(163,230,53,.05)}
+.ind b{font-size:16px;font-weight:800;letter-spacing:-.018em}
+.ind span{font-size:13.5px;color:var(--dim);line-height:1.5}
+.solstep{display:flex;gap:20px;padding:24px 0;border-bottom:1px solid var(--border)}
+.solstep .num{
+  font-family:var(--f-mono);font-size:12px;color:var(--lime-ink);flex:none;width:34px;padding-top:4px;letter-spacing:.08em;
+}
+.solstep h4{margin:0 0 6px;font-size:18.5px;font-weight:800;letter-spacing:-.022em}
+.solstep p{margin:0;color:var(--muted);font-size:15px;line-height:1.65}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.foot{border-top:1px solid var(--border);padding-block:clamp(48px,6vw,72px) 32px;background:var(--soft)}
+.foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:36px}
+@media(max-width:860px){.foot-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.foot-grid{grid-template-columns:1fr}}
+.foot h5{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);margin:0 0 16px;font-weight:500}
+.foot ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:11px}
+.foot ul a{font-size:14.5px;color:var(--muted);transition:color .3s}
+.foot ul a:hover{color:var(--lime-ink)}
+.foot-bot{
+  margin-top:48px;padding-top:24px;border-top:1px solid var(--border);
+  display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center;
+}
+.foot-bot p{margin:0;font-family:var(--f-mono);font-size:11.5px;color:var(--dim);letter-spacing:.04em}
+
+/* ============================================================
+   MOTION
+   ============================================================ */
+.reveal{opacity:0;transform:translateY(26px)}
+.reveal.in{opacity:1;transform:none;transition:opacity .8s var(--ease),transform .8s var(--ease)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.page{animation:fadeUp .5s var(--ease)}
+
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none}
+}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+a.sr-only:focus{position:fixed;top:14px;left:14px;width:auto;height:auto;clip:auto;margin:0;z-index:200;
+  padding:12px 20px;background:var(--lime);color:#0A0A0A;border-radius:100px;font-weight:800}
+</style>
+</head>
+<body>
+<a href="#main" class="sr-only">Skip to content</a>
+<div id="app"></div>
+<script>
+/* ============================================================
+   ICONS
+   ============================================================ */
+const I = {
+  brain:'<path d="M12 5a3 3 0 0 0-6 0 3 3 0 0 0-2 5.2A3 3 0 0 0 6 16a3 3 0 0 0 6 1"/><path d="M12 5a3 3 0 0 1 6 0 3 3 0 0 1 2 5.2A3 3 0 0 1 18 16a3 3 0 0 1-6 1"/><path d="M12 5v13"/>',
+  rocket:'<path d="M4.5 16.5c-1.5 1.3-2 5-2 5s3.7-.5 5-2c.7-.8.7-2-.1-2.8a2 2 0 0 0-2.9-.2z"/><path d="M12 15l-3-3a20 20 0 0 1 6-9 8.7 8.7 0 0 1 5 2 8.7 8.7 0 0 1 2 5 20 20 0 0 1-9 6z"/><circle cx="15" cy="9" r="1.6"/>',
+  grid:'<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>',
+  bot:'<rect x="3" y="8" width="18" height="12" rx="3"/><path d="M12 8V5M9 2h6"/><circle cx="8.5" cy="14" r="1.2"/><circle cx="15.5" cy="14" r="1.2"/>',
+  globe:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18 15 15 0 0 1 0-18z"/>',
+  spark:'<path d="M12 3l1.9 5.6L19.5 10l-5.6 1.9L12 17.5l-1.9-5.6L4.5 10l5.6-1.4z"/><path d="M18.5 16.5l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8z"/>',
+  arw:'<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M12 5l7 7-7 7"/></svg>',
+  tick:'<svg viewBox="0 0 24 24"><path d="M4 12.5l5.5 5.5L20 6"/></svg>',
+  mail:'<rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3.5 7l8.5 6 8.5-6"/>',
+  phone:'<path d="M5 3h4l2 5-2.5 1.5a12 12 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2.2 2A17 17 0 0 1 3 5.2 2 2 0 0 1 5 3z"/>',
+  pin:'<path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/>',
+  cal:'<rect x="3" y="5" width="18" height="16" rx="2.5"/><path d="M3 10h18M8 3v4M16 3v4"/>'
+};
+const icon = n => `<span class="ico"><svg viewBox="0 0 24 24">${I[n]}</svg></span>`;
+
+/* ============================================================
+   CONTENT MODEL — every service page renders from this
+   ============================================================ */
+const SERVICES = [
+{
+  slug:'ai-product-development', icon:'brain',
+  nav:'AI Product Development', navDesc:'RAG, agents, and LLM features that survive production',
+  title:'AI Product Development',
+  heroH:'AI that ships, not AI that demos.',
+  heroP:'Most AI projects die between the prototype and the production release. We build the part that is actually hard — retrieval that returns the right document, evaluation you can trust, and cost per request you can forecast.',
+  tags:['RAG','LLM Integration','AI SaaS','Custom GPT'],
+  probs:[
+    {t:'The demo worked. Production did not.',d:'A notebook that impressed the board falls apart on real data, real users and real latency budgets. Nobody scoped the gap.'},
+    {t:'It answers confidently and wrongly.',d:'Without grounded retrieval and evaluation, the model invents. In finance, legal or healthcare that is not a bug — it is liability.'},
+    {t:'Costs are unpredictable.',d:'Token spend scales with usage in ways that spreadsheets never modelled. One viral week and the unit economics invert.'},
+    {t:'Your data is scattered.',d:'The knowledge lives in PDFs, an ERP, three Google Drives and someone\u2019s inbox. There is no single surface to query.'}
+  ],
+  sol:[
+    {t:'Map the decision, not the model',d:'We start with the business decision the AI is supposed to improve, and define what a correct answer looks like before choosing any model.'},
+    {t:'Build the retrieval layer',d:'Document ingestion, chunking, embeddings and a vector index tuned to your corpus — with citations so every answer traces back to a source.'},
+    {t:'Wrap it in an evaluation harness',d:'A graded test set that runs on every deploy. You see accuracy move before your users do.'},
+    {t:'Ship with guardrails and telemetry',d:'Rate limits, fallback models, prompt-injection defence, and a dashboard showing cost, latency and failure rate per endpoint.'}
+  ],
+  deliv:['Production AI application','Retrieval pipeline with source citations','Evaluation test set and scoring harness','Prompt and model versioning','Cost and latency dashboard','Admin console for content and access','API documentation','Handover and team training'],
+  tech:['OpenAI','Anthropic Claude','LangChain','pgvector','Pinecone','Python','FastAPI','Next.js','PostgreSQL','Redis'],
+  inds:[
+    {t:'Legal',d:'Case retrieval, drafting, precedent search'},
+    {t:'Education',d:'Assessment generation, adaptive tutoring'},
+    {t:'Finance',d:'Document review, risk summarisation'},
+    {t:'Healthcare',d:'Clinical note structuring, triage support'},
+    {t:'Government',d:'Records search, citizen response drafting'},
+    {t:'Retail',d:'Catalogue enrichment, support deflection'}
+  ],
+  faq:[
+    {q:'Do we need our own model?',a:'Almost never. Fine-tuning is worth it for narrow, high-volume, repeatable tasks — grading, classification, formatting. For everything else a strong general model with good retrieval beats a mediocre fine-tune, and costs less to maintain. We will tell you which case you are in during discovery.'},
+    {q:'Where does our data live?',a:'Wherever your compliance requires. We deploy to your cloud account, an on-premise server, or a managed environment we run for you. For sensitive work we can keep embeddings and documents entirely inside your infrastructure and route only the prompt to the model provider.'},
+    {q:'How do you handle hallucination?',a:'Three layers: grounded retrieval so the model answers from your documents rather than memory, mandatory citations so every claim is checkable, and an evaluation set that catches regression before release. We also design the interface to show uncertainty instead of hiding it.'},
+    {q:'What does a first AI build cost?',a:'A focused production feature — one workflow, one data source, real users — typically runs 6 to 10 weeks. We scope it as a fixed-price phase after a paid discovery week, so you are never signing a blank cheque against an unclear problem.'}
+  ]
+},
+{
+  slug:'mvp-development', icon:'rocket',
+  nav:'MVP Development', navDesc:'A real product in weeks, built to survive success',
+  title:'MVP Development',
+  heroH:'Ship in weeks. Scale without a rewrite.',
+  heroP:'Speed is not an excuse for disposable code. We build minimum viable products on architecture that holds when the traction arrives — so your first hundred users and your first hundred thousand run on the same codebase.',
+  tags:['SaaS MVP','AI MVP','Prototyping','Validation'],
+  probs:[
+    {t:'Six months in, still not launched.',d:'Scope kept growing because nobody drew the line between what proves the idea and what merely completes it.'},
+    {t:'The cheap build has to be thrown away.',d:'A no-code stack or a rushed contractor gets you to launch, then blocks every feature you actually need next.'},
+    {t:'You are guessing at the market.',d:'Without instrumentation you cannot tell whether users left because of pricing, onboarding or the core idea.'},
+    {t:'Investors want more than slides.',d:'A working product with usage data changes the conversation from vision to evidence.'}
+  ],
+  sol:[
+    {t:'Cut to the one loop that matters',d:'We identify the single user loop that proves or kills the idea, and defer everything that does not touch it.'},
+    {t:'Design the screens before the schema',d:'Clickable UI first. It is far cheaper to argue about a prototype than about a built feature.'},
+    {t:'Build on boring, proven infrastructure',d:'Next.js, PostgreSQL, a managed host. No exotic choices that become hiring problems in month four.'},
+    {t:'Instrument from day one',d:'Analytics, funnels and error tracking ship with v1, so the launch produces answers rather than opinions.'},
+  ],
+  deliv:['Working product in production','Clickable design prototype','Authentication and user management','Payments or subscription billing','Admin dashboard','Analytics and event tracking','Deployment pipeline','Post-launch iteration sprint'],
+  tech:['Next.js','TypeScript','PostgreSQL','Prisma','Tailwind CSS','Stripe','Vercel','Supabase','React Native'],
+  inds:[
+    {t:'SaaS',d:'Subscription products and B2B tools'},
+    {t:'EdTech',d:'Learning, assessment and skill platforms'},
+    {t:'HR Tech',d:'Hiring, screening and workforce tools'},
+    {t:'Marketplaces',d:'Two-sided supply and demand products'},
+    {t:'Fintech',d:'Payments, lending and accounting tools'},
+    {t:'Logistics',d:'Tracking, dispatch and fleet products'}
+  ],
+  faq:[
+    {q:'How fast is fast?',a:'Six to ten weeks from kickoff to a product real users can pay for. Anything advertised as two weeks is a landing page with a waitlist, and anything past four months has stopped being an MVP.'},
+    {q:'Who owns the code?',a:'You do, from the first commit. We work in your repository under your organisation. There is no vendor lock-in, no proprietary framework, and no licence you have to keep paying to keep running.'},
+    {q:'What if we need to pivot mid-build?',a:'Expected. We work in two-week cycles with a demo at the end of each, so direction changes cost you one cycle rather than the whole engagement. The architecture is deliberately kept plain for exactly this reason.'},
+    {q:'Can you take over an existing half-built product?',a:'Yes. We start with a paid technical audit — what is salvageable, what is load-bearing, what has to go — and give you a written recommendation before either of us commits to a rebuild.'}
+  ]
+},
+{
+  slug:'erp-development', icon:'grid',
+  nav:'ERP Development', navDesc:'Systems shaped around how your business actually runs',
+  title:'ERP Development',
+  heroH:'ERP that fits the business, not the other way round.',
+  heroP:'Off-the-shelf ERP asks your team to abandon processes that took a decade to get right. We build systems around your actual operations — the approvals, the exceptions, the paperwork that regulators require.',
+  tags:['HR','Inventory','Finance','Procurement','CRM'],
+  probs:[
+    {t:'The software fights your process.',d:'A generic ERP forces workarounds, and within a year the real numbers live in parallel spreadsheets again.'},
+    {t:'Nobody trusts the reports.',d:'Data entered in three places disagrees with itself, so leadership makes decisions on gut feel.'},
+    {t:'Licences cost more every year.',d:'Per-seat pricing punishes growth, and the modules you actually need are always in the higher tier.'},
+    {t:'Approvals happen over WhatsApp.',d:'Critical authorisations leave no audit trail, which is a problem the first time anyone asks for one.'}
+  ],
+  sol:[
+    {t:'Shadow the operation first',d:'We sit with the people doing the work and document the real process — including the exceptions nobody wrote down.'},
+    {t:'Model the data once',d:'A single normalised schema so a supplier, an employee or an item means the same thing in every module.'},
+    {t:'Build role-aware workflows',d:'Approvals, escalations and permissions that mirror your organisation chart, with a full audit log behind them.'},
+    {t:'Roll out module by module',d:'One department goes live, stabilises, and becomes the proof that convinces the next. No big-bang cutover.'}
+  ],
+  deliv:['Custom ERP modules','Role-based access control','Approval and audit trails','Reporting and dashboards','Data migration from existing systems','Bengali and English interface','Mobile access for field staff','Staff training and documentation'],
+  tech:['Laravel','PostgreSQL','Next.js','Redis','Docker','REST APIs','Power BI','React Native'],
+  inds:[
+    {t:'Manufacturing',d:'Production, BOM, quality control'},
+    {t:'Construction',d:'Project costing, BOQ, site tracking'},
+    {t:'Healthcare',d:'Patients, pharmacy, diagnostics'},
+    {t:'Education',d:'Admissions, results, accounts'},
+    {t:'Retail & Distribution',d:'Stock, orders, field sales'},
+    {t:'Government',d:'Records, procurement, compliance'}
+  ],
+  faq:[
+    {q:'Why custom instead of SAP or Odoo?',a:'If your processes are standard, do not build — configure an off-the-shelf system and save the money. Custom earns its cost when your competitive advantage lives in a process no product supports, or when licence fees over five years exceed the build. We will say so plainly if buying is the better answer for you.'},
+    {q:'How long does an ERP take?',a:'The first module goes live in 8 to 12 weeks. A full multi-module system is usually a 9 to 18 month programme, delivered department by department so value arrives long before the programme ends.'},
+    {q:'Can it work with our existing accounting software?',a:'Yes. We integrate through APIs, scheduled file exchange, or direct database sync depending on what your current system supports. Replacing accounting is rarely the right first move — we usually leave it in place and connect to it.'},
+    {q:'Does it support Bangla?',a:'Fully. Interface, reports, printed documents and data entry all support Bangla alongside English, including proper rendering in generated PDFs — which is where most systems quietly fail.'}
+  ]
+},
+{
+  slug:'ai-agents-automation', icon:'bot',
+  nav:'AI Agents & Automation', navDesc:'Software that does the work instead of tracking it',
+  title:'AI Agents & Workflow Automation',
+  heroH:'Stop paying people to move data between screens.',
+  heroP:'Every organisation has work that is essential, repetitive and entirely rule-shaped: triaging email, chasing approvals, reconciling records, answering the same forty questions. We build agents that handle it and escalate when they should not.',
+  tags:['Support Agents','Email Automation','Multi-Agent','Internal Tools'],
+  probs:[
+    {t:'Skilled people do clerical work.',d:'Your best staff spend hours copying between systems because integration was never budgeted.'},
+    {t:'Support cannot keep up.',d:'The same questions arrive daily, response times slip, and hiring more agents only moves the ceiling.'},
+    {t:'Automations break silently.',d:'Zapier chains fail at 2am, nobody notices for a week, and the recovery is manual.'},
+    {t:'Institutional knowledge walks out.',d:'The answer is in someone\u2019s head or a four-year-old thread nobody can find.'}
+  ],
+  sol:[
+    {t:'Measure before automating',d:'We instrument the workflow to find where the hours actually go. It is frequently not where people assume.'},
+    {t:'Automate the deterministic part first',d:'Rules handle what rules can handle. The model is reserved for judgement, which keeps cost and error rate down.'},
+    {t:'Define the escalation boundary',d:'Every agent has an explicit line it will not cross alone, and a human it hands to when confidence drops.'},
+    {t:'Monitor like production software',d:'Alerting, retries, dead-letter queues and a review console where a person can see and correct what the agent did.'}
+  ],
+  deliv:['Deployed agent or automation','Integration with your existing tools','Human-in-the-loop review console','Escalation and fallback rules','Knowledge base ingestion','Monitoring and failure alerts','Performance reporting','Runbook for your team'],
+  tech:['Claude','OpenAI','n8n','Temporal','Python','Node.js','Slack API','Gmail API','Webhooks','PostgreSQL'],
+  inds:[
+    {t:'Customer Support',d:'Ticket triage, first-response drafting'},
+    {t:'Human Resources',d:'CV screening, onboarding, policy Q&A'},
+    {t:'Sales',d:'Lead qualification, CRM hygiene, follow-up'},
+    {t:'Finance',d:'Invoice matching, expense checks'},
+    {t:'Operations',d:'Scheduling, dispatch, exception handling'},
+    {t:'Legal',d:'Document intake, clause extraction'}
+  ],
+  faq:[
+    {q:'Will this replace our staff?',a:'In our experience it moves them. The clerical hours disappear and the same team handles more volume, more exceptions, and the work that actually needed a person. If your goal is headcount reduction, say so during discovery so we scope honestly rather than discovering the mismatch at handover.'},
+    {q:'What happens when the agent gets it wrong?',a:'It gets caught. Every agent we deploy has a confidence threshold, an escalation path to a named human, and a review console showing what it did and why. For high-stakes actions we default to draft-and-approve rather than autonomous execution.'},
+    {q:'Can it work with the software we already use?',a:'Usually. If your tools have an API we integrate directly. If they do not, we can work through scheduled exports, email, or a browser automation layer — less elegant, but it works, and we will tell you which one you are getting.'},
+    {q:'How do you price automation work?',a:'Fixed price per workflow after a paid discovery, plus an optional monthly retainer for monitoring and tuning. Agents drift as your business changes, so unmaintained automation degrades — we would rather that expectation be set upfront.'}
+  ]
+},
+{
+  slug:'business-websites', icon:'globe',
+  nav:'Business Websites', navDesc:'Corporate and SME sites built for growth',
+  title:'Business Websites',
+  heroH:'Your website is your first salesperson.',
+  heroP:'For most buyers it is the only version of your company they will meet before deciding whether to talk to you. We build sites that load fast, say something specific, and make the next step obvious.',
+  tags:['Corporate','SME','Startup','Portfolio'],
+  probs:[
+    {t:'It looks like everyone else.',d:'A stock template with a stock photo of a handshake tells a buyer nothing about why you are the right choice.'},
+    {t:'Nobody can find you.',d:'No structured data, slow pages, thin content — so the search ranking never arrives.'},
+    {t:'Editing needs a developer.',d:'A price change waits three weeks because the site was built without anyone thinking about who maintains it.'},
+    {t:'Traffic arrives and leaves.',d:'Visitors read one page and bounce because there is no clear, low-friction next action.'}
+  ],
+  sol:[
+    {t:'Start with the buyer\u2019s question',d:'We write the page structure around what a prospect needs to know in order to say yes, then design to that.'},
+    {t:'Design a system, not pages',d:'A component library so the twentieth page looks as considered as the first, and stays that way as the site grows.'},
+    {t:'Build for speed and search',d:'Static rendering, optimised images, semantic markup and structured data. Fast sites rank, and they convert.'},
+    {t:'Hand over something editable',d:'A CMS your marketing team can actually use, with training so they are not dependent on us for a headline change.'}
+  ],
+  deliv:['Fully responsive website','Design system and component library','CMS for content editing','SEO structure and metadata','Analytics setup','Contact and enquiry routing','Performance optimisation','Ongoing support option'],
+  tech:['Next.js','Tailwind CSS','Sanity','WordPress','Framer Motion','Vercel','Cloudflare'],
+  inds:[
+    {t:'Professional Services',d:'Consulting, legal, accounting'},
+    {t:'Manufacturing',d:'Industrial and export-facing sites'},
+    {t:'Healthcare',d:'Clinics, diagnostics, hospitals'},
+    {t:'Education',d:'Institutions and training providers'},
+    {t:'Real Estate',d:'Developers and property portfolios'},
+    {t:'Technology',d:'Startups and software companies'}
+  ],
+  faq:[
+    {q:'How long does a business website take?',a:'Four to eight weeks for a standard corporate site, depending mostly on how quickly content and approvals come back from your side. We can compress that with a phased launch — core pages first, secondary pages after.'},
+    {q:'Do you write the content?',a:'We can. Copy is usually the bottleneck, so we offer it as part of the engagement: interviews with your team, then written pages you review. Sites where the client writes their own copy launch later, without exception.'},
+    {q:'Will we be able to update it ourselves?',a:'Yes. Every site ships with a CMS and a training session. If you would rather not touch it, we offer a maintenance retainer — but you should have the option either way.'},
+    {q:'Do you handle hosting and domains?',a:'We deploy to your accounts wherever possible so you retain ownership. If you would prefer us to manage hosting, DNS and SSL, that is available as a monthly service.'}
+  ]
+},
+{
+  slug:'product-landing-pages', icon:'spark',
+  nav:'Product Landing Pages', navDesc:'High-conversion pages for SaaS and AI launches',
+  title:'Interactive Product Landing Pages',
+  heroH:'A page that sells the product, not the adjectives.',
+  heroP:'Launch pages fail when they describe features instead of demonstrating value. We build interactive pages where the visitor can see the product work before they are asked for anything.',
+  tags:['SaaS Launch','Motion Design','Conversion','Storytelling'],
+  probs:[
+    {t:'Visitors do not understand the product.',d:'Three paragraphs of positioning where a ten-second interaction would have made it obvious.'},
+    {t:'Paid traffic converts badly.',d:'You are buying clicks into a page that was never tested, so acquisition cost climbs with nothing to show.'},
+    {t:'The page is slow.',d:'Heavy animation libraries and unoptimised video push load times past the point where mobile visitors wait.'},
+    {t:'Launch momentum is wasted.',d:'Product Hunt day arrives and the page has no email capture, no analytics and no follow-up path.'}
+  ],
+  sol:[
+    {t:'Lead with a demonstration',d:'An interactive module, live preview or guided walkthrough placed above the fold, so the value is shown rather than claimed.'},
+    {t:'Sequence the story',d:'Problem, mechanism, proof, objection, ask — in that order, with scroll pacing that matches how people actually read.'},
+    {t:'Animate with a performance budget',d:'Motion that respects reduced-motion settings and never blocks first paint. Elegance is not worth two seconds.'},
+    {t:'Instrument every section',d:'Scroll depth, interaction and conversion tracking so the next iteration is informed by data, not taste.'}
+  ],
+  deliv:['Interactive landing page','Custom motion and scroll design','Interactive product demo module','Email capture and CRM connection','A/B test setup','Conversion and scroll analytics','Mobile-optimised experience','Launch-day support'],
+  tech:['Next.js','Framer Motion','GSAP','Tailwind CSS','Lottie','PostHog','Vercel'],
+  inds:[
+    {t:'AI Products',d:'Model, agent and copilot launches'},
+    {t:'SaaS',d:'Feature launches and free-trial pages'},
+    {t:'Mobile Apps',d:'App store conversion pages'},
+    {t:'Hardware',d:'Pre-order and campaign pages'},
+    {t:'Events',d:'Conference and cohort registration'},
+    {t:'Funding',d:'Investor and data-room front pages'}
+  ],
+  faq:[
+    {q:'How is this different from a normal website?',a:'Scope and intent. A landing page has one job and one measurable outcome, so it gets a level of interaction design and testing that would be uneconomical to apply across twenty corporate pages. Usually two to three weeks, single page, heavily iterated.'},
+    {q:'Can you build an interactive demo of our product?',a:'Yes — that is often the highest-leverage part of the page. Depending on your product it might be a sandboxed live version, a scripted walkthrough, or a faithful interactive mock. We will recommend based on what your product can safely expose.'},
+    {q:'Do you run the A/B tests too?',a:'We set up the infrastructure and can run the first round with you. Sustained testing needs traffic volume — below roughly a thousand visitors a week, results will not reach significance and you are better off improving the page directly.'},
+    {q:'Will all that animation hurt performance?',a:'Not if it is budgeted. We set a performance target at the start and test against it throughout. Animation that cannot fit the budget gets cut, which is why we design the motion and the page structure together rather than adding effects at the end.'}
+  ]
+}
+];
+const SVCMAP = Object.fromEntries(SERVICES.map(s=>[s.slug,s]));
+const A = I.arw;
+
+/* ============================================================
+   EMAILJS CONFIG
+   1. Create a free account at https://www.emailjs.com
+   2. Add an Email Service (Gmail, Outlook, etc.) -> copy its Service ID
+   3. Create an Email Template with variables matching the form's
+      "name" attributes: {{name}} {{email}} {{company}} {{service}} {{message}}
+      -> copy the Template ID
+   4. Account -> General -> copy your Public Key
+   5. Paste all three below.
+   ============================================================ */
+const EMAILJS = {
+  publicKey:  'irqE9BEENii8lp6b8',
+  serviceId:  'service_tt79noz',
+  templateId: 'template_jfwe4wv'
+};
+if(window.emailjs) emailjs.init({ publicKey: EMAILJS.publicKey });
+
+const PROJECTS = [
+  {n:'KANF',slug:'kanf',cat:'AI Framework',d:'Kaarjo\u2019s adaptive neural framework — a 13-layer architecture powering assessment generation, grading and adaptive learning across our products.',t:['Python','LLM','Vector Search'],rows:['w86','lime','w70','w52'],
+    highlights:['13-layer adaptive architecture shared across the Kaarjo product line','Powers assessment generation, grading and adaptive learning','Retrieval and fine-tuned models tuned for domain-specific accuracy'],
+    stack:['Python','LLM','Vector Search','Fine-tuning pipeline']},
+  {n:'Litigation Management Platform',slug:'litigation-management-platform',cat:'Government',d:'A digital office and case-management system for a national justice institution: filings, cause lists, assignments and reporting in one workflow.',t:['PostgreSQL','Next.js','RBAC'],rows:['w70','w86','lime','w52'],
+    highlights:['Digitises filings, cause lists and case assignment for a national justice institution','Role-based access control matched to a real organisational hierarchy','Centralised reporting across previously disconnected offices'],
+    stack:['PostgreSQL','Next.js','RBAC','Bangla document rendering']},
+  {n:'Kaarjo Skill Test',slug:'kaarjo-skill-test',cat:'HR Tech',d:'AI-generated skill assessments with CV autofill, structured exams and automated grading against a 259-skill taxonomy spanning 20 sectors.',t:['PHP','MySQL','Fine-tuned LLM'],rows:['lime','w86','w52','w70'],
+    highlights:['AI-generated exams mapped to a 259-skill taxonomy across 20 sectors','CV autofill speeds up candidate onboarding','Automated, consistent grading at scale'],
+    stack:['PHP','MySQL','Fine-tuned LLM']},
+  {n:'Folio',slug:'folio',cat:'SaaS Product',d:'A portfolio and professional-presence product for individuals and teams, built on the same design system that runs across the Kaarjo product line.',t:['Next.js','Supabase','Stripe'],rows:['w52','w70','lime','w86'],
+    highlights:['Portfolio and professional-presence product for individuals and teams','Built on the same design system used across the Kaarjo product line','Subscription billing built in from day one'],
+    stack:['Next.js','Supabase','Stripe']}
+];
+const PROJMAP = Object.fromEntries(PROJECTS.map(p=>[p.slug,p]));
+
+/* ============================================================
+   CHROME — nav, footer, shared sections
+   ============================================================ */
+function tswHTML(){
+  return `<button class="tsw" role="switch" aria-checked="true" aria-label="Switch to dark mode" title="Switch theme">
+    <span class="tsw-wire" aria-hidden="true"></span>
+    <span class="tsw-trail" aria-hidden="true"></span>
+    <span class="tsw-knob" aria-hidden="true"></span>
+  </button>`;
+}
+
+function nav(){
+  const items = SERVICES.map(s=>`
+    <a class="dd-item" href="#/services/${s.slug}">
+      ${icon(s.icon)}
+      <span><p class="t">${s.nav}</p><p class="d">${s.navDesc}</p></span>
+    </a>`).join('');
+  return `
+  <header class="nav" id="nav">
+    <div class="wrap nav-in">
+      <a class="logo" href="#/" aria-label="Kaarjo Technology home">kaarjo<span class="dot"></span></a>
+      <nav class="nav-links" aria-label="Main">
+        <div class="dd">
+          <button class="navitem" aria-expanded="false" aria-haspopup="true">Services
+            <svg width="11" height="7" viewBox="0 0 12 8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M1 1l5 5 5-5"/></svg>
+          </button>
+          <div class="dd-panel">${items}</div>
+        </div>
+        <a href="#/#work">Work</a>
+        <a href="#/#process">Process</a>
+        <a href="#/#about">About</a>
+        <a href="#/#contact">Contact</a>
+      </nav>
+      <div class="nav-cta">
+        ${tswHTML()}
+        <a class="btn btn-primary btn-sm" href="#/#contact">Book a strategy call ${A}</a>
+        <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+  <div class="mobile" id="mobile">
+    <div class="grp">Services</div>
+    ${SERVICES.map(s=>`<a href="#/services/${s.slug}">${s.nav}</a>`).join('')}
+    <div class="grp">Company</div>
+    <a href="#/#work">Work</a>
+    <a href="#/#process">Process</a>
+    <a href="#/#about">About</a>
+    <a href="#/#contact">Contact</a>
+    <a class="btn btn-primary" href="#/#contact">Book a strategy call ${A}</a>
+  </div>`;
+}
+
+function footer(){
+  return `
+  <footer class="foot">
+    <div class="wrap">
+      <div class="foot-grid">
+        <div>
+          <a class="logo" href="#/">kaarjo<span class="dot"></span></a>
+          <p class="body-dim" style="margin-top:14px;max-width:34ch;font-size:14.5px">Engineering intelligent software for real business problems. Chattogram and Dhaka, Bangladesh.</p>
+        </div>
+        <div><h5>Services</h5><ul>${SERVICES.map(s=>`<li><a href="#/services/${s.slug}">${s.nav}</a></li>`).join('')}</ul></div>
+        <div><h5>Company</h5><ul>
+          <li><a href="#/#about">About</a></li><li><a href="#/#work">Work</a></li>
+          <li><a href="#/#process">Process</a></li><li><a href="#/#why">Why Kaarjo</a></li>
+          <li><a href="#/#contact">Contact</a></li></ul></div>
+        <div><h5>Get in touch</h5><ul>
+          <li><a href="mailto:hello@kaarjo.com">hello@kaarjo.com</a></li>
+          <li><a href="tel:+8801000000000">+880 1000 000000</a></li>
+          <li><a href="#/#contact">Book a call</a></li></ul></div>
+      </div>
+      <div class="foot-bot">
+        <p>&copy; ${new Date().getFullYear()} Kaarjo Technology. All rights reserved.</p>
+        <p>Chattogram &middot; Dhaka &middot; Bangladesh</p>
+      </div>
+    </div>
+  </footer>`;
+}
+
+function ctaBand(h,p,b){
+  return `
+  <section class="sec"><div class="wrap">
+    <div class="cta-band reveal">
+      <div class="glow glow-lime" style="width:520px;height:320px;top:-140px;left:50%;transform:translateX(-50%)"></div>
+      <div class="inner">
+        <span class="eyebrow">Next step</span>
+        <h2 class="h-sec">${h}</h2>
+        <p class="lede">${p}</p>
+        <div class="hero-cta" style="justify-content:center">
+          <a class="btn btn-primary" href="#/#contact">${b} ${A}</a>
+          <a class="btn btn-ghost" href="#/#work">See our work</a>
+        </div>
+        <p class="mono" style="margin:6px 0 0">Typical reply within one business day</p>
+      </div>
+    </div>
+  </div></section>`;
+}
+
+function faqBlock(list){
+  return `<div class="faq">${list.map(f=>`
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false"><span>${f.q}</span><span class="faq-ic" aria-hidden="true"></span></button>
+      <div class="faq-a"><p>${f.a}</p></div>
+    </div>`).join('')}</div>`;
+}
+
+function contactSection(){
+  return `
+  <section class="sec" id="contact"><div class="wrap">
+    <div class="head-block reveal">
+      <span class="eyebrow">Contact</span>
+      <h2 class="h-sec">Tell us what you are trying to build.</h2>
+      <p class="lede">A short form, a real reply. If your problem is not a fit for us we will say so and point you somewhere better.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="cinfo reveal">
+        <a href="mailto:hello@kaarjo.com">${icon('mail')}<span><div class="lbl">Email</div><div class="val">hello@kaarjo.com</div></span></a>
+        <a href="tel:+8801000000000">${icon('phone')}<span><div class="lbl">Phone</div><div class="val">+880 1000 000000</div></span></a>
+        <div class="row">${icon('pin')}<span><div class="lbl">Offices</div><div class="val">Chattogram &amp; Dhaka</div><div class="sub">Bangladesh</div></span></div>
+        <div class="row">${icon('cal')}<span><div class="lbl">Strategy call</div><div class="val">30 minutes, no charge</div><div class="sub">We review your problem and tell you whether it needs software at all.</div></span></div>
+      </div>
+      <div class="glass form reveal" id="formCard">
+        <form id="contactForm" novalidate>
+          <div class="frow">
+            <div class="field"><label for="f-name">Your name</label><input id="f-name" name="name" type="text" autocomplete="name" required><span class="msg">Enter your name</span></div>
+            <div class="field"><label for="f-email">Work email</label><input id="f-email" name="email" type="email" autocomplete="email" required><span class="msg">Enter a valid email address</span></div>
+          </div>
+          <div class="frow">
+            <div class="field"><label for="f-company">Company</label><input id="f-company" name="company" type="text" autocomplete="organization"></div>
+            <div class="field"><label for="f-service">What do you need</label>
+              <select id="f-service" name="service" required>
+                <option value="">Select a service</option>
+                ${SERVICES.map(s=>`<option>${s.nav}</option>`).join('')}
+                <option>Not sure yet</option>
+              </select><span class="msg">Choose one</span></div>
+          </div>
+          <div class="field"><label for="f-msg">The problem you are solving</label>
+            <textarea id="f-msg" name="message" required placeholder="What breaks today, who it affects, and what a good outcome looks like."></textarea>
+            <span class="msg">Tell us a little about the problem</span></div>
+          <button class="btn btn-primary" type="submit" style="width:100%;margin-top:4px" id="submitBtn">Send enquiry ${A}</button>
+          <p class="form-error" id="formError" style="display:none;font-size:13px;color:#F26D6D;margin:0">Something went wrong sending your message. Please try again, or email us at hello@kaarjo.com.</p>
+          <p class="form-note">By sending this you agree we may contact you about your enquiry. We do not add you to a mailing list.</p>
+        </form>
+        <div class="sent" id="sentState">
+          <span class="tick">${I.tick}</span>
+          <h3 class="h-sub">Enquiry sent</h3>
+          <p class="body-dim" style="max-width:38ch">We have your message. Expect a reply from a member of the team within one business day.</p>
+          <button class="btn btn-ghost btn-sm" id="resetForm">Send another</button>
+        </div>
+      </div>
+    </div>
+  </div></section>`;
+}
+
+
+/* ============================================================
+   HOME
+   ============================================================ */
+const PROCESS = [
+  {n:'01',t:'Discover',d:'A working session with the people who live inside the problem. We map the process, the exceptions and the cost of the current way.',dur:'Week 1'},
+  {n:'02',t:'Strategy',d:'Architecture, scope and a fixed price. You get a written plan you could hand to another firm — that is how we keep it honest.',dur:'Week 2'},
+  {n:'03',t:'Build',d:'Two-week cycles with a working demo at the end of each. You see progress in the product, not in a status report.',dur:'Weeks 3–10'},
+  {n:'04',t:'Launch',d:'Deployment, migration, training and a stabilisation period. Then we agree what happens next, if anything.',dur:'Ongoing'}
+];
+const WHY = [
+  {k:'01',t:'AI-first, not AI-flavoured',d:'We have shipped retrieval systems, fine-tuned models and production agents. That is the default toolkit here, not an upsell.'},
+  {k:'02',t:'We start with the business case',d:'If the problem is a broken process, software will not fix it. We will tell you that before you spend money finding out.'},
+  {k:'03',t:'Fixed scope, fixed price',d:'Discovery produces a written specification and a number. No open-ended hourly billing against a moving target.'},
+  {k:'04',t:'Architecture that survives growth',d:'Enterprise-grade data modelling and access control, applied even to small builds, so version two is an extension rather than a rewrite.'},
+  {k:'05',t:'You own everything',d:'Your repository, your cloud accounts, your data. No proprietary runtime you have to keep renting from us.'},
+  {k:'06',t:'Built for this market',d:'Bangla rendering, local payment rails, government procurement formats, unreliable connectivity. We have already solved these.'}
+];
+
+function home(){
+  return `
+  <main id="main" class="page">
+    <section class="hero">
+      <div class="glow glow-lime" style="width:620px;height:480px;top:-160px;right:-120px"></div>
+      <div class="glow glow-blue" style="width:520px;height:420px;bottom:-180px;left:-160px"></div>
+      <div class="wrap hero-grid hero-solo">
+        <div class="hero-copy" style="max-width:800px">
+          <h1 class="h-hero reveal">Building technology that solves <span class="grad-text">real business problems</span>.</h1>
+          <p class="lede reveal">Kaarjo Technology turns complex workflows into scalable digital products — for startups, SMEs, enterprises and government. We do not just build software. We build systems that change how the work gets done.</p>
+          <div class="hero-cta reveal">
+            <a class="btn btn-primary" href="#/#contact">Book a strategy call ${A}</a>
+            <a class="btn btn-ghost" href="#/#services">Explore services</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="strip"><div class="wrap" style="padding:0"><div class="strip-in">
+      <div class="stat"><b>20</b><span>Sectors mapped</span></div>
+      <div class="stat"><b>259+</b><span>Skills in our taxonomy</span></div>
+      <div class="stat"><b>13</b><span>Layers in KANF</span></div>
+      <div class="stat"><b>4</b><span>Products in the line</span></div>
+    </div></div></div>
+
+    <section class="sec" id="process">
+      <div class="wrap">
+        <div class="head-block reveal">
+          <span class="eyebrow">Trusted process</span>
+          <h2 class="h-sec">Four steps. No surprises.</h2>
+          <p class="lede">The same sequence whether we are building a landing page or a national case-management system. It exists so you always know what happens next and what it costs.</p>
+        </div>
+        <div class="proc">
+          ${PROCESS.map(x=>`<div class="glass step reveal"><span class="n">${x.n}</span><h3>${x.t}</h3><p>${x.d}</p><span class="dur">${x.dur}</span></div>`).join('')}
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="services">
+      <div class="glow glow-lime" style="width:520px;height:400px;top:20%;left:-200px"></div>
+      <div class="wrap">
+        <div class="head-block reveal">
+          <span class="eyebrow">What we build</span>
+          <h2 class="h-sec">Six things, done properly.</h2>
+          <p class="lede">Each one is a full practice with its own team, process and delivery standard — not a line item added to a proposal.</p>
+        </div>
+        <div class="grid g-3">
+          ${SERVICES.map(s=>`
+            <a class="glass svc reveal" href="#/services/${s.slug}">
+              ${icon(s.icon)}
+              <h3 class="h-card">${s.title}</h3>
+              <p>${s.navDesc}.</p>
+              <div class="tags">${s.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+              <span class="go">View service ${A}</span>
+            </a>`).join('')}
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="why">
+      <div class="wrap why-grid">
+        <div class="head-block reveal" style="margin-bottom:0;position:sticky;top:110px">
+          <span class="eyebrow">Why Kaarjo</span>
+          <h2 class="h-sec">The reasons clients stay.</h2>
+          <p class="lede">Most agencies compete on price or speed. We compete on whether the thing still works in year three.</p>
+          <a class="link-arw" href="#/#contact" style="margin-top:8px">Talk to an engineer ${A}</a>
+        </div>
+        <div class="why-list reveal">
+          ${WHY.map(w=>`<div class="why-item"><span class="k">${w.k}</span><div><h4>${w.t}</h4><p>${w.d}</p></div></div>`).join('')}
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="work">
+      <div class="wrap">
+        <div class="head-block reveal">
+          <span class="eyebrow">Featured work</span>
+          <h2 class="h-sec">Products we have put into the world.</h2>
+          <p class="lede">A mix of client systems and our own product line. The second is how we prove the first.</p>
+        </div>
+        <div class="grid g-2">
+          ${PROJECTS.map(p=>`
+            <a class="glass proj reveal" href="#/work/${p.slug}" aria-label="View ${p.n} details">
+              <div class="proj-vis">
+                <div class="proj-mock">
+                  <div class="mock-bar"><i></i><i></i><i></i></div>
+                  ${p.rows.map(r=>`<div class="mock-row ${r}"></div>`).join('')}
+                </div>
+              </div>
+              <div class="proj-body">
+                <span class="mono">${p.cat}</span>
+                <h3>${p.n}</h3>
+                <p>${p.d}</p>
+                <div class="tags" style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px">${p.t.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+                <span class="mono" style="color:var(--lime-ink);margin-top:6px;display:inline-flex;align-items:center;gap:6px">View details ${A}</span>
+              </div>
+            </a>`).join('')}
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="about">
+      <div class="glow glow-blue" style="width:480px;height:380px;top:10%;right:-180px"></div>
+      <div class="wrap why-grid">
+        <div class="reveal">
+          <span class="eyebrow">About</span>
+          <h2 class="h-sec" style="margin-top:20px">We build the software this region has been importing.</h2>
+        </div>
+        <div class="stack-md reveal">
+          <p class="lede">Kaarjo Technology was founded on a straightforward observation: the organisations doing the most complex work in Bangladesh — manufacturers, hospitals, institutions, government offices — were running on software designed for somewhere else, or on nothing at all.</p>
+          <p class="lede">So we build systems shaped around how the work actually happens here. That means Bangla that renders correctly in a generated PDF, approval chains that match a real organisational hierarchy, and interfaces that hold up on a mid-range phone over a patchy connection.</p>
+          <p class="lede">Alongside client work we develop our own products — KANF, our adaptive AI framework, and the platforms built on top of it. Running our own products keeps us honest: we ship on the same architecture we recommend to you.</p>
+          <div class="hero-cta"><a class="btn btn-ghost" href="#/#contact">Work with us ${A}</a></div>
+        </div>
+      </div>
+    </section>
+
+    ${ctaBand('Ready to build your next product?','Thirty minutes with an engineer who will ask hard questions about your problem before proposing anything.','Book a free consultation')}
+    ${contactSection()}
+  </main>`;
+}
+
+/* ============================================================
+   SERVICE PAGE
+   ============================================================ */
+function servicePage(s){
+  return `
+  <main id="main" class="page">
+    <section class="svc-hero">
+      <div class="glow glow-lime" style="width:600px;height:440px;top:-180px;right:-140px"></div>
+      <div class="wrap">
+        <nav class="crumbs reveal" aria-label="Breadcrumb"><a href="#/">Home</a><span>/</span><a href="#/#services">Services</a><span>/</span><span style="color:#B8B8B8">${s.title}</span></nav>
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <span class="eyebrow reveal">${s.title}</span>
+            <h1 class="h-hero reveal" style="font-size:clamp(38px,6.4vw,74px)">${s.heroH}</h1>
+            <p class="lede reveal">${s.heroP}</p>
+            <div class="hero-cta reveal">
+              <a class="btn btn-primary" href="#/#contact">Book a strategy call ${A}</a>
+              <a class="btn btn-ghost" href="#/#services">All services</a>
+            </div>
+          </div>
+          <div class="reveal" style="display:flex;justify-content:center">
+            <div class="glass" style="padding:36px;width:100%;max-width:420px;display:flex;flex-direction:column;gap:22px">
+              ${icon(s.icon)}
+              <div class="tags" style="display:flex;flex-wrap:wrap;gap:8px">${s.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+              <div style="border-top:1px solid var(--border);padding-top:20px;display:flex;flex-direction:column;gap:14px">
+                ${s.deliv.slice(0,3).map(d=>`<div style="display:flex;gap:11px;align-items:center"><span class="tk" style="width:19px;height:19px;border-radius:50%;display:grid;place-items:center;background:rgba(163,230,53,.14);border:1px solid rgba(163,230,53,.42);color:var(--lime-ink);flex:none"><svg viewBox="0 0 24 24" style="width:10px;height:10px;stroke:currentColor;fill:none;stroke-width:2.8;stroke-linecap:round;stroke-linejoin:round"><path d="M4 12.5l5.5 5.5L20 6"/></svg></span><span style="font-size:14.5px;color:var(--muted)">${d}</span></div>`).join('')}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec-tight"><div class="wrap">
+      <div class="head-block reveal">
+        <span class="eyebrow">Problems we solve</span>
+        <h2 class="h-sec">What usually goes wrong.</h2>
+      </div>
+      <div class="grid g-2">
+        ${s.probs.map(p=>`<div class="glass card reveal"><h3 class="h-card">${p.t}</h3><p>${p.d}</p></div>`).join('')}
+      </div>
+    </div></section>
+
+    <section class="sec"><div class="wrap why-grid">
+      <div class="head-block reveal" style="margin-bottom:0;position:sticky;top:110px">
+        <span class="eyebrow">Our solution</span>
+        <h2 class="h-sec">How we approach it.</h2>
+        <p class="lede">The sequence matters more than the tooling. Each step exists to make the next one cheaper.</p>
+      </div>
+      <div class="reveal" style="border-top:1px solid var(--border)">
+        ${s.sol.map((x,i)=>`<div class="solstep"><span class="num">0${i+1}</span><div><h4>${x.t}</h4><p>${x.d}</p></div></div>`).join('')}
+      </div>
+    </div></section>
+
+    <section class="sec-tight"><div class="wrap">
+      <div class="head-block reveal">
+        <span class="eyebrow">Deliverables</span>
+        <h2 class="h-sec">What you receive.</h2>
+      </div>
+      <div class="checklist reveal">
+        ${s.deliv.map(d=>`<div class="check"><span class="tk">${I.tick}</span><b>${d}</b></div>`).join('')}
+      </div>
+    </div></section>
+
+    <section class="sec-tight"><div class="wrap">
+      <div class="head-block reveal"><span class="eyebrow">Technologies</span><h2 class="h-sec">Built with.</h2></div>
+      <div class="techrow reveal">${s.tech.map(t=>`<span class="techpill"><i></i>${t}</span>`).join('')}</div>
+    </div></section>
+
+    <section class="sec-tight"><div class="wrap">
+      <div class="head-block reveal"><span class="eyebrow">Industries</span><h2 class="h-sec">Where we have done this.</h2></div>
+      <div class="indgrid reveal">${s.inds.map(x=>`<div class="ind"><b>${x.t}</b><span>${x.d}</span></div>`).join('')}</div>
+    </div></section>
+
+    <section class="sec"><div class="wrap" style="max-width:900px">
+      <div class="head-block reveal"><span class="eyebrow">FAQ</span><h2 class="h-sec">Questions worth asking.</h2></div>
+      <div class="reveal">${faqBlock(s.faq)}</div>
+    </div></section>
+
+    ${ctaBand('Book a strategy meeting.','Bring the problem, not the specification. Thirty minutes is usually enough to tell whether we are the right team for it.','Book a strategy call')}
+    ${contactSection()}
+  </main>`;
+}
+
+/* ============================================================
+   PRODUCT / PROJECT DETAIL PAGE
+   ============================================================ */
+function projectPage(p){
+  return `
+  <main id="main" class="page">
+    <section class="svc-hero">
+      <div class="glow glow-lime" style="width:600px;height:440px;top:-180px;right:-140px"></div>
+      <div class="wrap">
+        <nav class="crumbs reveal" aria-label="Breadcrumb"><a href="#/">Home</a><span>/</span><a href="#/#work">Work</a><span>/</span><span style="color:#B8B8B8">${p.n}</span></nav>
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <span class="eyebrow reveal">${p.cat}</span>
+            <h1 class="h-hero reveal" style="font-size:clamp(38px,6.4vw,74px)">${p.n}</h1>
+            <p class="lede reveal">${p.d}</p>
+            <div class="hero-cta reveal">
+              <a class="btn btn-primary" href="#/#contact">Book a strategy call ${A}</a>
+              <a class="btn btn-ghost" href="#/#work">All work</a>
+            </div>
+          </div>
+          <div class="reveal proj-vis" style="height:320px;border-radius:var(--r-xl);border:1px solid var(--border)">
+            <div class="proj-mock" style="width:84%">
+              <div class="mock-bar"><i></i><i></i><i></i></div>
+              ${p.rows.map(r=>`<div class="mock-row ${r}"></div>`).join('')}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec-tight"><div class="wrap">
+      <div class="head-block reveal">
+        <span class="eyebrow">Highlights</span>
+        <h2 class="h-sec">What it does.</h2>
+      </div>
+      <div class="checklist reveal">
+        ${p.highlights.map(h=>`<div class="check"><span class="tk">${I.tick}</span><b>${h}</b></div>`).join('')}
+      </div>
+    </div></section>
+
+    <section class="sec-tight"><div class="wrap">
+      <div class="head-block reveal"><span class="eyebrow">Technologies</span><h2 class="h-sec">Built with.</h2></div>
+      <div class="techrow reveal">${p.stack.map(t=>`<span class="techpill"><i></i>${t}</span>`).join('')}</div>
+    </div></section>
+
+    ${ctaBand('Want something like this?','Tell us about the workflow you need to fix. We will tell you honestly whether software is the right answer.','Book a strategy call')}
+    ${contactSection()}
+  </main>`;
+}
+
+/* ============================================================
+   THEME
+   Light is the default per brand direction. Session-only:
+   to persist across visits, save THEME to localStorage here
+   and read it back on load.
+   ============================================================ */
+let THEME = 'light';
+function applyTheme(){
+  document.documentElement.setAttribute('data-theme', THEME);
+  const m = document.querySelector('meta[name="theme-color"]');
+  if(m) m.setAttribute('content', THEME === 'light' ? '#F4F6F1' : '#0A0A0A');
+  document.querySelectorAll('.tsw').forEach(b=>{
+    b.setAttribute('aria-checked', THEME === 'light');
+    b.setAttribute('aria-label', THEME === 'light' ? 'Switch to dark mode' : 'Switch to light mode');
+  });
+}
+function toggleTheme(btn){
+  THEME = THEME === 'dark' ? 'light' : 'dark';
+  applyTheme();
+  if(btn && !matchMedia('(prefers-reduced-motion: reduce)').matches){
+    btn.classList.remove('zap');
+    void btn.offsetWidth;
+    btn.classList.add('zap');
+  }
+}
+
+/* ============================================================
+   ROUTER + BEHAVIOUR
+   ============================================================ */
+const app = document.getElementById('app');
+
+function parseHash(){
+  const h = location.hash.replace(/^#\/?/,'');
+  const [path, anchor] = h.split('#');
+  const parts = path.split('/').filter(Boolean);
+  return {parts, anchor};
+}
+
+let CURRENT = null;
+function render(){
+  const {parts, anchor} = parseHash();
+  const key = parts.join('/');
+  if(CURRENT === key && document.getElementById('main')){
+    if(anchor){
+      const t = document.getElementById(anchor);
+      if(t){ t.scrollIntoView({behavior:'smooth',block:'start'}); return; }
+    }
+    window.scrollTo({top:0,behavior:'smooth'}); return;
+  }
+  CURRENT = key;
+  let view, title;
+  if(parts[0]==='services' && SVCMAP[parts[1]]){
+    const s = SVCMAP[parts[1]];
+    view = servicePage(s);
+    title = `${s.title} — Kaarjo Technology`;
+    document.querySelector('meta[name="description"]').setAttribute('content', s.heroP.slice(0,155));
+  } else if(parts[0]==='work' && PROJMAP[parts[1]]){
+    const p = PROJMAP[parts[1]];
+    view = projectPage(p);
+    title = `${p.n} — Kaarjo Technology`;
+    document.querySelector('meta[name="description"]').setAttribute('content', p.d.slice(0,155));
+  } else {
+    view = home();
+    title = 'Kaarjo Technology — Engineering Intelligent Software for Real Business Problems';
+  }
+  document.title = title;
+  app.innerHTML = nav() + view + footer();
+  wire();
+  if(anchor){
+    const el = document.getElementById(anchor);
+    if(el){ requestAnimationFrame(()=>el.scrollIntoView({behavior:'smooth',block:'start'})); return; }
+  }
+  window.scrollTo(0,0);
+}
+
+function wire(){
+  /* theme switch */
+  document.querySelectorAll('.tsw').forEach(b=>b.addEventListener('click',()=>toggleTheme(b)));
+  applyTheme();
+
+  /* sticky nav */
+  const navEl = document.getElementById('nav');
+  const onScroll = ()=> navEl.classList.toggle('stuck', window.scrollY > 12);
+  onScroll();
+  window.removeEventListener('scroll', window.__ks || (()=>{}));
+  window.__ks = onScroll;
+  window.addEventListener('scroll', onScroll, {passive:true});
+
+  /* mobile menu */
+  const burger = document.getElementById('burger'), mob = document.getElementById('mobile');
+  burger.addEventListener('click', ()=>{
+    const on = mob.classList.toggle('on');
+    burger.classList.toggle('on', on);
+    burger.setAttribute('aria-expanded', on);
+    document.body.style.overflow = on ? 'hidden' : '';
+  });
+  mob.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+    mob.classList.remove('on'); burger.classList.remove('on');
+    burger.setAttribute('aria-expanded','false'); document.body.style.overflow='';
+  }));
+
+  /* services dropdown — keyboard accessible */
+  const dd = document.querySelector('.dd');
+  if(dd){
+    const btn = dd.querySelector('.navitem');
+    btn.addEventListener('click', e=>{
+      e.stopPropagation();
+      const on = dd.classList.toggle('open');
+      btn.setAttribute('aria-expanded', on);
+    });
+    document.addEventListener('click', ()=>{ dd.classList.remove('open'); btn.setAttribute('aria-expanded','false'); });
+    document.addEventListener('keydown', e=>{ if(e.key==='Escape') dd.classList.remove('open'); });
+  }
+
+  /* FAQ accordion */
+  document.querySelectorAll('.faq-item').forEach(item=>{
+    const q = item.querySelector('.faq-q'), a = item.querySelector('.faq-a');
+    q.addEventListener('click', ()=>{
+      const open = item.classList.contains('open');
+      item.closest('.faq').querySelectorAll('.faq-item').forEach(o=>{
+        o.classList.remove('open'); o.querySelector('.faq-a').style.maxHeight = null;
+        o.querySelector('.faq-q').setAttribute('aria-expanded','false');
+      });
+      if(!open){
+        item.classList.add('open');
+        a.style.maxHeight = a.scrollHeight + 'px';
+        q.setAttribute('aria-expanded','true');
+      }
+    });
+  });
+
+  /* scroll reveal */
+  const els = document.querySelectorAll('.reveal');
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches){
+    els.forEach(e=>e.classList.add('in'));
+  } else {
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach((en,i)=>{
+        if(en.isIntersecting){
+          const sibs = [...en.target.parentElement.children].indexOf(en.target);
+          en.target.style.transitionDelay = Math.min(sibs,5)*70 + 'ms';
+          en.target.classList.add('in');
+          io.unobserve(en.target);
+        }
+      });
+    },{rootMargin:'0px 0px -8% 0px',threshold:.08});
+    els.forEach(e=>io.observe(e));
+  }
+
+  /* contact form */
+  const form = document.getElementById('contactForm');
+  if(form){
+    const sent = document.getElementById('sentState');
+    const errBox = document.getElementById('formError');
+    const submitBtn = document.getElementById('submitBtn');
+    const submitLabel = submitBtn.innerHTML;
+    const fail = f => { f.closest('.field').classList.add('err'); };
+    form.querySelectorAll('input,select,textarea').forEach(el=>{
+      el.addEventListener('input', ()=>el.closest('.field').classList.remove('err'));
+      el.addEventListener('change', ()=>el.closest('.field').classList.remove('err'));
+    });
+    form.addEventListener('submit', e=>{
+      e.preventDefault();
+      errBox.style.display = 'none';
+      let ok = true, first = null;
+      const v = id => form.querySelector(id);
+      const checks = [
+        [v('#f-name'), el => el.value.trim().length > 1],
+        [v('#f-email'), el => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(el.value.trim())],
+        [v('#f-service'), el => el.value !== ''],
+        [v('#f-msg'), el => el.value.trim().length > 0]
+      ];
+      checks.forEach(([el,test])=>{
+        if(!test(el)){ fail(el); ok = false; first = first || el; }
+      });
+      if(!ok){ first.focus(); return; }
+
+      if(!window.emailjs || EMAILJS.publicKey === 'YOUR_PUBLIC_KEY'){
+        console.warn('[kaarjo] EmailJS is not configured yet — fill in EMAILJS.publicKey / serviceId / templateId.');
+        errBox.style.display = 'block';
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = 'Sending…';
+      emailjs.sendForm(EMAILJS.serviceId, EMAILJS.templateId, form)
+        .then(()=>{
+          form.style.display = 'none';
+          sent.classList.add('on');
+        })
+        .catch(err=>{
+          console.error('[kaarjo] EmailJS send failed', err);
+          errBox.style.display = 'block';
+        })
+        .finally(()=>{
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = submitLabel;
+        });
+    });
+    const reset = document.getElementById('resetForm');
+    reset && reset.addEventListener('click', ()=>{
+      form.reset(); form.style.display = ''; document.getElementById('sentState').classList.remove('on');
+    });
+  }
+}
+
+window.addEventListener('hashchange', render);
+if(!location.hash) location.replace('#/');
+render();
+
+</script>
+</body>
+</html>
